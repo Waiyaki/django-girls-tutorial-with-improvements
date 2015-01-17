@@ -1,24 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Waiyaki | Marioshoni</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="#">Lessons at Marioshoni</a></h1>
-        </div>
-        <div>
-            <p>Hi there.</p>
-            <p>These are the lessons learnt at Marioshoni.</p>
-        </div>
+{% extends 'blog/base.html' %}
 
-        {% for post in posts %}
-            <div>
-                <h2><a href="#">{{ post.title }}</a></h2>
-                <p>{{ post.text | linebreaks }}</p>
-                <p>Written by: {{ post.author }}</p>
-                <p>Published: {{ post.published_date }}</p>
-            </div>
-        {% endfor %}   
-    </body>
-</html>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <h2><a href="#">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaks }}</p>
+            <div class="date">Published: {{ post.published_date }}</div>
+        </div>
+    {% endfor %}
+{% endblock %}

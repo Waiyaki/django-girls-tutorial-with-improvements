@@ -83,6 +83,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'blog/static/blog'),)
+
 #TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 import dj_database_url

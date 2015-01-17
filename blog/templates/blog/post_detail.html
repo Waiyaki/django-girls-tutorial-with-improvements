@@ -4,8 +4,11 @@
     <div class="post_detail">
         <div class="date">
             {% if post.published_date %}
-                <p>{{ post.published_date }}</p>
+                {{ post.published_date }}
             {% endif %}
+            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-default">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
         </div>
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaks }}</p>

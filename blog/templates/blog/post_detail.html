@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post_detail">
+        <div class="date">
+            {% if post.published_date %}
+                <p>{{ post.published_date }}</p>
+            {% endif %}
+        </div>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaks }}</p>
+    </div>
+    <div class="footer">
+        <p><a href="/blog/">Home</a></p>
+    </div>
+{% endblock %}

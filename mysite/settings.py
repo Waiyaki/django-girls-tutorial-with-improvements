@@ -103,3 +103,5 @@ try:
 
 except ImportError:
     pass
+
+LOGIN_REDIRECT_URL = '/'

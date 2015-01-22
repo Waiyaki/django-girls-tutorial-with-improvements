@@ -3,52 +3,159 @@
 {% load staticfiles %}
 <html>
     <head>
-        <title>Waiyaki | Marioshoni</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Marioshoni | {% block title %}{% endblock title %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+        <style type="text/css">
+            body {
+                background: #FAFAFA;
+                font-family: "Helvetica Neue", Arial, sans-serif;
+            }
+
+            h1, h2, h3, h4 {
+                font-family: 'Lobster', cursive;
+            }
+
+            .nav li a:hover{
+                background-color: #00AAFA;
+            }
+
+            .navbar-brand {
+                font-family: 'Lobster', cursive;
+                font-size: 32px;
+            }
+
+            .post {
+                background-color: #efefef;
+                border: 2px solid #FAFAFA;
+                border-radius: 10px;
+                padding: 5px 5px;
+                text-align: center;
+            }
+
+            .post h2 a:visited {
+                color: #00AEFF;
+            }
+
+            .post h2 a {
+                color: #FF0065;
+            }
+
+            .page-header {
+                background-color: #0082FF;
+                padding: 20px 20px 20px 40px;
+                text-decoration: none;
+            }
+
+            .new-drafts {
+                background: #0082FF;
+            }
+
+            .page-header a{
+                color: #ffffff;
+            }
+
+            .page-header small {
+                color: #E5E5E5;
+                font-size: 24px;
+            }
+            .post_detail h1{
+                color: #00aeff;
+                text-align: left;
+            }
+
+            .user {
+                font-size: 24px;
+            }
+
+            .date {
+                float: right;
+                color: #828282;
+            }
+
+            .post-form textarea, .post-form input {
+                width: 100%;
+            }
+
+        </style>
     </head>
     <body>
-        <div class="page-header">
-            <div class="wrapper">                
-                <h1><a href="/blog/">Lessons at Marioshoni</a></h1>
-
-                <div>
-                    <p>These are the lessons learnt at Marioshoni.</p>
+        <div class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar-content">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/blog/" class="navbar-brand">Marioshoni Bush School</a>
                 </div>
 
+                <div class="collapse navbar-collapse" id="mynavbar-content">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .navbar navbar-default -->
+
+
+        <div class="container">
+            <div class="page-header jumbotron">
+                <h1>
+                    <a href="/blog/">Marioshoni Bush School</a>
+                    <br><small>Lessons learnt at Marioshoni : One of a kind.</small>
+                </h1>
+
                 {% if user.is_authenticated %}
-                    <a href="{% url 'blog.views.post_new' %}" class="top-menu">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
-                    <a href="{% url 'post_draft_list' %}" class="top-menu">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                    <p>Hi {{ user.username }}
-                        <small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small>
-                    </p>
+                    <p class="user">Hi {{ user.username }}</p>
+                    <ul class="nav nav-tabs pull-right new-drafts">
+                        <li>
+                            <a href="{% url 'blog.views.post_new' %}">
+                                <span class="glyphicon glyphicon-plus"> New</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'post_draft_list' %}">
+                                <span class="glyphicon glyphicon-edit"> Drafts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>
+                        </li>
+                    </ul>
+                    
                 {% else %}
-                    <p> Hi there.</p>
+                    <span class="user">Hi there.</span>
                     <a href="{% url 'django.contrib.auth.views.login' %}">
-                        <span class="glyphicon glyphicon-lock"> Login </span>
+                        <span class="glyphicon glyphicon-lock pull-right"> Login </span>
                     </a>
                 {% endif %}
             </div>
-        </div>
 
-        <div class="content container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="well-lg col-md-12">
                     {% block content %}
+                        
                     {% endblock %}
-                </div>
+                </div>                
             </div>
-        </div> 
-        
-        <div class="footer">
-            <p><a href="/blog/">Home</a></p>
-        </div>  
+
+            <hr>
+            <div class="footer pull-right">
+                {% block breadcrumb %}
+                {% endblock %}
+            </div>
+        </div> <!-- .container -->
+
+        <script src="{% static "js/jquery_1_11_2.js" %}"></script>
+        <script src="{% static "js/bootstrap.min.js" %}"></script>
     </body>
 </html>

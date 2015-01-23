@@ -1,34 +1,40 @@
 {% extends 'blog/base.html' %}
 
+{%  block title %}
+    {{ post.title }}
+{% endblock %}
+
 {% block content %}
     <div class="post_detail">
-        <div class="date">
+        {% if user.is_authenticated %}
+            <ul class="nav nav-tabs pull-right">
+                <li>
+                    <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-pencil"> Edit</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'blog.views.post_remove' pk=post.pk%}"  class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"> Delete</span>
+                    </a>
+                </li>
+            </ul>
+        {% endif %}
+
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaks }}</p>
+
+        <div class="date pull-left">
             {% if post.published_date %}
                 <p>Published: {{ post.published_date }}</p>
             {% else %}
+                <p>Created: {{ post.created_date }}</p>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'blog.views.post_publish' pk=post.pk %}"    class="btn btn-default">Publish</a>
+                    <br>
+                    <a href="{% url 'blog.views.post_publish' pk=post.pk %}"    class="btn btn-primary">Publish</a>
                 {% endif %}
             {% endif %}
-
-            {% if user.is_authenticated %}
-                <ul class="nav nav-tabs pull-right">
-                    <li>
-                        <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil"> Edit</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'blog.views.post_remove' pk=post.pk%}"  class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"> Delete</span>
-                        </a>
-                    </li>
-                </ul>
-            {% endif %}
-
         </div>
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaks }}</p>
     </div>
 {% endblock %}
 

@@ -6,82 +6,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Marioshoni | {% block title %}{% endblock title %}</title>
+        <title>Marioshoni | {% block title %}One of a Kind{% endblock title %}</title>
         <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-
-        <style type="text/css">
-            body {
-                background: #FAFAFA;
-                font-family: "Helvetica Neue", Arial, sans-serif;
-            }
-
-            h1, h2, h3, h4 {
-                font-family: 'Lobster', cursive;
-            }
-
-            .nav li a:hover{
-                background-color: #00AAFA;
-            }
-
-            .navbar-brand {
-                font-family: 'Lobster', cursive;
-                font-size: 32px;
-            }
-
-            .post {
-                background-color: #efefef;
-                border: 2px solid #FAFAFA;
-                border-radius: 10px;
-                padding: 5px 5px;
-                text-align: center;
-            }
-
-            .post h2 a:visited {
-                color: #00AEFF;
-            }
-
-            .post h2 a {
-                color: #FF0065;
-            }
-
-            .page-header {
-                background-color: #0082FF;
-                padding: 20px 20px 20px 40px;
-                text-decoration: none;
-            }
-
-            .new-drafts {
-                background: #0082FF;
-            }
-
-            .page-header a{
-                color: #ffffff;
-            }
-
-            .page-header small {
-                color: #E5E5E5;
-                font-size: 24px;
-            }
-            .post_detail h1{
-                color: #00aeff;
-                text-align: left;
-            }
-
-            .user {
-                font-size: 24px;
-            }
-
-            .date {
-                float: right;
-                color: #828282;
-            }
-
-            .post-form textarea, .post-form input {
-                width: 100%;
-            }
-
-        </style>
+        <link rel="stylesheet" type="text/css" href="{% static "css/blog.css" %}">
     </head>
     <body>
         <div class="navbar navbar-inverse">
@@ -102,9 +30,22 @@
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">Feedback</a></li>
                     </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'django.contrib.auth.views.logout' %}">{{ user.username }} -- Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'django.contrib.auth.views.login' %}">
+                                    <span class="glyphicon glyphicon-lock pull-right"> Login</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
-        </div><!-- .navbar navbar-default -->
+        </div><!-- .navbar navbar-inverse -->
 
 
         <div class="container">
@@ -127,16 +68,10 @@
                                 <span class="glyphicon glyphicon-edit"> Drafts</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>
-                        </li>
                     </ul>
                     
                 {% else %}
                     <span class="user">Hi there.</span>
-                    <a href="{% url 'django.contrib.auth.views.login' %}">
-                        <span class="glyphicon glyphicon-lock pull-right"> Login </span>
-                    </a>
                 {% endif %}
             </div>
 
@@ -149,9 +84,14 @@
             </div>
 
             <hr>
+
             <div class="footer pull-right">
                 {% block breadcrumb %}
                 {% endblock %}
+            </div>
+
+            <div class="footer pull-left">
+                <p><small>&copy;Copyright Waiyaki&trade;, Inc. 2015</small></p>
             </div>
         </div> <!-- .container -->
 

@@ -1,13 +1,28 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    {% for post in posts %}
-        <div class="col-md-4 col-sm-6 col-xs-12 post">
-            <h2><a href="{% url 'blog.views.post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-            <p>{{ post.text|linebreaks|truncatechars:400 }}</p>
-            <div class="date">Published: {{ post.published_date }}</div>
+    {% if posts %}
+        {% for post in posts %}
+            <div class="col-md-4 col-sm-6 col-xs-12 post">
+                <h2><a href="{% url 'blog.views.post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                <p>{{ post.text|linebreaks|truncatechars:400 }}</p>
+                <div class="date">Published: {{ post.published_date }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 jumbotron">
+            {% if user.is_authenticated %}
+                <h1>Hello {{ user.username }}.</h1>
+                <p>From where I am sitting, it looks like you are yet to post any content.</p>
+                <p>Click on the button below to create new content.</p>
+                <h2><a href="{% url 'blog.views.post_new' %}"><span class="btn btn-primary btn-lg">Post a new blog</span></a></h2>
+            {% else %}
+                <h1>Hello there.</h1>
+                <p>Oops! It looks like there is no blog content at this time. Please do check again later.</p>
+            {% endif %}     
         </div>
-    {% endfor %}
+    {% endif %}
+    
 {% endblock %}
 
 {% block breadcrumb %}

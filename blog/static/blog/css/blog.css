@@ -1,67 +1,55 @@
 body {
+    background: #FAFAFA;
     font-family: "Helvetica Neue", Arial, sans-serif;
-}
-.page-header {
-    background-color: #ff9400;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
-}
-
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
-    font-size: 36pt;
-    text-decoration: none;
-}
-
-.wrapper, .content {
-    width: 70%;
-    margin: 20px auto 20px auto;
-}
-
-.content {
-    border: 2px solid #efefef;
-    border-radius: 5px;
-    margin: auto auto;
 }
 
 h1, h2, h3, h4 {
     font-family: 'Lobster', cursive;
 }
 
-.date {
-    float: right;
-    color: #828282;
+.nav li a:hover{
+    background-color: #00AAFA;
 }
 
-.save {
-    float: right;
-}
-
-.post-form textarea, .post-form input {
-    width: 100%;
-}
-
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
+.navbar-brand {
+    font-family: 'Lobster', cursive;
+    font-size: 32px;
 }
 
 .post {
-    width: 32%;
-    margin: 0.5%;
-    float: left;
-    clear: right;
     background-color: #efefef;
-    border: 2px solid #ffffff;
-    border-radius: 5px;
-    padding: 10px 10px;
+    border: 2px solid #FAFAFA;
+    border-radius: 10px;
+    padding: 5px 5px;
     text-align: center;
 }
 
-.post h1 a, .post h1 a:visited {
-    color: #000000;
+.post h2 a:visited {
+    color: #00AEFF;
+}
+
+.post h2 a {
+    color: #FF0065;
+}
+
+.page-header {
+    background-color: #0082FF;
+    padding: 20px 20px 20px 40px;
+    text-decoration: none;
+}
+
+.new-drafts {
+    background: #0082FF;
+    border-radius: 5px;
+}
+
+.page-header a{
+    color: #ffffff;
+}
+
+.page-header small {
+    color: #E5E5E5;
+    font-size: 24px;
 }
 
 .post_detail h1{
@@ -69,10 +57,20 @@ h1, h2, h3, h4 {
     text-align: left;
 }
 
-.footer {
-    padding: 10px 10px;
-    color: #efefef;
-    font-size: 12px;
+.user {
+    font-size: 24px;
+}
+
+.date {
     float: right;
-    margin: auto auto;
+    color: #828282;
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+}
+
+.drafts {
+    text-align: left;
+    padding: 10px;
 }

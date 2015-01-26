@@ -8,7 +8,7 @@
     {% if posts %}
         {% for post in  posts %}
             <div class="post drafts col-md-4 col-sm-6 col-xs-12">
-                <h1><a href="{% url 'blog.views.post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
                 <p> {{ post.text | truncatechars:200 }}</p>
                 <div class="date">
                     <p>Created: {{ post.created_date }}</p>
@@ -19,7 +19,8 @@
         <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 jumbotron">
             <p><strong>Yey! All of your articles are published, there are no drafts here.</strong></p>
             <p>Click on the button below to see them.</p>
-            <h2><a href="{% url 'blog.views.post_list' %}"><span class="btn btn-primary btn-lg">Home</span></a></h2>
+            <br>
+            <h2><a href="{% url 'post_list' %}"><span class="btn btn-primary btn-lg btn-block">Home</span></a></h2>
         </div>
     {% endif %}
 {% endblock content %}
@@ -31,11 +32,11 @@
                 <a href="/blog">Home</a>
             </li>
             <li class="active">
-                <a href="{% url 'blog.views.post_draft_list' %}">Drafts</a>
+                <a href="{% url 'post_draft_list' %}">Drafts</a>
             </li>
         {% else %}
             <li class="active">
-                <a href="{% url 'blog.views.post_draft_list' %}">{{ post.title }}</a>
+                <a href="{% url 'post_draft_list' %}">{{ post.title }}</a>
             </li>
         {% endif %}
     </ol>

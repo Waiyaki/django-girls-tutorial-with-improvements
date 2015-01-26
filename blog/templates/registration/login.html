@@ -1,24 +1,20 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-    {% if form.errors %}
-        <p>Your username and password did not match. Please try again.</p>
-    {% endif %}
+    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 jumbotron">
+        <h1>Login</h1>
+        <form method="post" action=".">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>{{ form.username.label_tag }}</td>
-                <td>{{ form.username }}</td>
-            </tr>
-            <tr>
-                <td>{{ form.password.label_tag }}</td>
-                <td>{{ form.password }}</td>
-            </tr>
-        </table>
-        <button type="submit" class="btn btn-primary">Login</button>
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
+            <br>
+            <input type="submit" value="Login" class="btn btn-primary btn-lg btn-block" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+        <p>Not registered yet? <a href="{% url 'registration_register' %}" class="btn btn-primary">Register Here</a></p>
+    </div>
 {% endblock content %}
 

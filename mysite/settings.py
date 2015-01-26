@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,4 +105,9 @@ try:
 except ImportError:
     pass
 
-LOGIN_REDIRECT_URL = '/'
+
+REGISTRATION_OPEN = True
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/blog/'
+LOGIN_URL = '/accounts/login/'

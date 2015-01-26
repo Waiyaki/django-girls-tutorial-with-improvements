@@ -33,11 +33,11 @@
                     <ul class="nav navbar-nav pull-right">
                         {% if user.is_authenticated %}
                             <li>
-                                <a href="{% url 'django.contrib.auth.views.logout' %}">{{ user.username }} -- Logout</a>
+                                <a href="{% url 'auth_logout' %}?next=/blog/">{{ user.username }} -- Logout</a>
                             </li>
                         {% else %}
                             <li>
-                                <a href="{% url 'django.contrib.auth.views.login' %}">
+                                <a href="{% url 'auth_login' %}">
                                     <span class="glyphicon glyphicon-lock pull-right"> Login</span>
                                 </a>
                             </li>
@@ -59,7 +59,7 @@
                     <p class="user">Hi {{ user.username }}</p>
                     <ul class="nav nav-tabs pull-right new-drafts">
                         <li>
-                            <a href="{% url 'blog.views.post_new' %}">
+                            <a href="{% url 'post_new' %}">
                                 <span class="glyphicon glyphicon-plus"> New</span>
                             </a>
                         </li>

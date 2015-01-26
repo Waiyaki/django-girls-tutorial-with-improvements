@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+    Registration Complete!
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2 col-xs-12 jumbotron text-center">
+
+        <h1>Registration Complete</h1>
+
+        <p>Congratulations! You are now registered!</p>
+        <p><a href="{% url 'post_list' %}" class="btn btn-primary btn-lg btn-block">Home</a></p>
+    </div>
+{% endblock %}

@@ -9,12 +9,12 @@
         {% if user.is_authenticated %}
             <ul class="nav nav-tabs pull-right">
                 <li>
-                    <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary btn-sm">
+                    <a href="{% url 'post_edit' post_slug=post.slug %}" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-pencil"> Edit</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'post_remove' pk=post.pk%}"  class="btn btn-danger btn-sm">
+                    <a href="{% url 'post_remove' post_slug=post.slug %}"  class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove"> Delete</span>
                     </a>
                 </li>
@@ -31,7 +31,7 @@
                 <p>Created: {{ post.created_date }}</p>
                 {% if user.is_authenticated %}
                     <br>
-                    <a href="{% url 'post_publish' pk=post.pk %}"    class="btn btn-primary btn-lg btn-block">Publish</a>
+                    <a href="{% url 'post_publish' post_slug=post.slug %}"    class="btn btn-primary btn-lg btn-block">Publish</a>
                 {% endif %}
             {% endif %}
         </div>
@@ -41,6 +41,6 @@
 {% block breadcrumb %}
     <ol class="breadcrumb">
         <li><a href="/blog/">Home</a></li>
-        <li class="active"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></li>
+        <li class="active"><a href="{% url 'post_detail' post_slug=post.slug %}">{{ post.slug }}</a></li>
     </ol>
 {% endblock %}

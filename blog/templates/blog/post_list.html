@@ -4,7 +4,7 @@
     {% if posts %}
         {% for post in posts %}
             <div class="col-md-4 col-sm-6 col-xs-12 post">
-                <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                <h2><a href="{% url 'post_detail' post_slug=post.slug %}">{{ post.title }}</a></h2>
                 <p>{{ post.text|linebreaks|truncatechars:400 }}</p>
                 <div class="date">Published: {{ post.published_date }}</div>
             </div>
@@ -19,11 +19,18 @@
                 <h2><a href="{% url 'post_new' %}"><span class="btn btn-primary btn-lg btn-block">Post a new blog</span></a></h2>
             {% else %}
                 <h1>Hello there.</h1>
-                <p>Oops! It looks like there is no blog content at this time. Please do check again later.</p>
+                <p><em>Oops!</em> It looks like there is no blog content at this time. Please do check again later.</p>
             {% endif %}     
         </div>
     {% endif %}
-    
+
+    {% if visits %}
+        <div class="row">
+            <div class="col-xs-12 pull-left">
+            <p><small>You have visited this site {{ visits }} time(s).</small></p>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumb %}

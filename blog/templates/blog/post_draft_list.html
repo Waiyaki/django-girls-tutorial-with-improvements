@@ -8,7 +8,7 @@
     {% if posts %}
         {% for post in  posts %}
             <div class="post drafts col-md-4 col-sm-6 col-xs-12">
-                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <h1><a href="{% url 'post_detail' post_slug=post.slug %}">{{ post.title }}</a></h1>
                 <p> {{ post.text | truncatechars:200 }}</p>
                 <div class="date">
                     <p>Created: {{ post.created_date }}</p>
@@ -36,7 +36,7 @@
             </li>
         {% else %}
             <li class="active">
-                <a href="{% url 'post_draft_list' %}">{{ post.title }}</a>
+                <a href="{% url 'post_draft_list' %}">{{ post.slug }}</a>
             </li>
         {% endif %}
     </ol>

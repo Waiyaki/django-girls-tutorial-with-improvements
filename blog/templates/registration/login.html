@@ -2,19 +2,36 @@
 
 {% block content %}
     <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 jumbotron">
-        <h1>Login</h1>
-        <form method="post" action=".">
+        <form method="post" action="." class="form-signin" role="form">
             {% csrf_token %}
-            {{ form.as_p }}
+            <h1 class="form-signin-heading">Login</h1>
+
+            {% if form.errors %}
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger">Invalid username or password.</li>
+                </ul>
+            {% endif %}
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input class="form-control" id="id_username" maxlength="254" name="username" type="text" required autofocus placeholder="Username">
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Password:</label>
+                <input class="form-control" id="id_password" name="password" type="password" placeholder="Enter password">
+            </div>
 
             <br>
-            <input type="submit" value="Login" class="btn btn-primary btn-lg" />
-            <input type="hidden" name="next" value="{{ next }}" />
+            <input type="submit" value="Login" class="btn btn-primary btn-lg btn-block" />
+            
         </form>
+
+        <hr>
+        <div class="col-xs-12">
+            <p><small>Not registered yet? </small><a href="{% url 'registration_register' %}" class="btn btn-primary">Register Here</a></p>
+    </div>
     </div>
 
-    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-        <p>Not registered yet? <a href="{% url 'registration_register' %}" class="btn btn-primary">Register Here</a></p>
-    </div>
+    
 {% endblock content %}
 

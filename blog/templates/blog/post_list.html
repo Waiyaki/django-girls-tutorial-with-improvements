@@ -6,7 +6,7 @@
             <div class="col-md-4 col-sm-6 col-xs-12 post">
                 <h2><a href="{% url 'post_detail' post_slug=post.slug %}">{{ post.title }}</a></h2>
                 <p>{{ post.text|linebreaks|truncatechars:400 }}</p>
-                <div class="date">Published: {{ post.published_date }}</div>
+                <div class="date">Published: {{ post.published_date }} by {{ post.author }}</div>
             </div>
         {% endfor %}
     {% else %}

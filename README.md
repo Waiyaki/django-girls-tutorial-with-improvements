@@ -5,4 +5,3 @@ Issues with this version:
     - Only one blog, Marioshoni, exists. Each registered user should be
       given their own blogs.
       That should be fixed.
-    - Yet to redesign the forms.

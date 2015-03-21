@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
@@ -22,6 +23,17 @@ def post_list(request):
     else:
         request.session['visits'] = 1
         request.session['last_visit_time'] = str(datetime.now())
+
+    paginator = Paginator(posts, 10)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # deliver the first page.
+        posts = paginator.page(1)
+    except (InvalidPage, EmptyPage):
+        # If page is out of range, return the last page.
+        posts = paginator.page(paginator.num_pages)
 
     context_dict = {'posts': posts, 'visits': visits}
 
@@ -106,5 +118,5 @@ def add_comment(request, slug):
             comment.author = author
             comment.save()
         else:
-            print(form.errors) # print to the console.
+            print(form.errors)  # print to the console.
     return redirect('blog.views.post_detail', post_slug=slug)

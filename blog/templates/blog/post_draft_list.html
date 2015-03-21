@@ -7,9 +7,14 @@
 {% block content %}
     {% if posts %}
         {% for post in  posts %}
-            <div class="post drafts col-md-4 col-sm-6 col-xs-12">
-                <h1><a href="{% url 'post_detail' post_slug=post.slug %}">{{ post.title }}</a></h1>
-                <p> {{ post.text | truncatechars:200 }}</p>
+            <div class="post drafts col-xs-12 col-md-10 col-md-offset-1">
+                <h1 class="text-center"><a href="{% url 'post_detail' post_slug=post.slug %}">{{ post.title }}</a></h1>
+                <p> 
+                    {{ post.text | truncatechars:1000 }}
+                    {% if post.text|length > 1000 %}
+                        <a href="{% url 'post_detail' post_slug=post.slug %}"> More&raquo;</a>
+                    {% endif %}
+                </p>
                 <div class="date">
                     <p>Created: {{ post.created_date }} by {{ post.author }}</p>
                 </div>

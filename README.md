@@ -1,7 +1,6 @@
+Fixed:
+    - Only original content creators or staff members can edit, delete or publish posts.
+
 Issues with this version:
-    - Updated registration, but any logged in user
-      can edit/delete any blog even if they weren't the authors.
-      That should be fixed.
-    - Only one blog, Marioshoni, exists. Each registered user should be
-      given their own blogs.
-      That should be fixed.
+    - Any registered user can view all drafts. Only staff members should view all drafts,
+      users should only view drafts that they have created. Fix coming soon.

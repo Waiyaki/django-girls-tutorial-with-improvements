@@ -20,7 +20,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="/blog/" class="navbar-brand">Marioshoni Bush School</a>
+                    <a href="/blog/" class="navbar-brand">Marioshoni Community Blog</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="mynavbar-content">
@@ -55,12 +55,12 @@
         <div class="container">
             <div class="page-header jumbotron" id="base-page">
                 <h1>
-                    <a href="/blog/">Marioshoni Bush School</a>
-                    <br><small>Lessons learnt at Marioshoni : One of a kind.</small>
+                    <a href="/blog/">Marioshoni Community Blog</a>
+                    <br><small>Marioshoni Community: living together, blogging together, about the issues affecting us.<br>One of a Kind.</small>
                 </h1>
 
                 {% if user.is_authenticated %}
-                    <p class="user">Hi {{ user.username }}</p>
+                    <p class="user">Hi {{ user.username }}, <span class="greeter"><em>feel free to let the community know what is on your mind today.</em></span></p>
                     <ul class="nav nav-tabs pull-right new-drafts">
                         <li>
                             <a href="{% url 'post_new' %}">
@@ -95,11 +95,14 @@
             </div>
 
             <div class="footer pull-left">
-                <p><small>&copy;Copyright, Waiyaki&trade; Inc. 2015</small></p>
+                <p><small>&copy;Copyright, Waiyaki&trade; Inc. <span id="footerDate"></span></small></p>
             </div>
         </div> <!-- .container -->
 
         <script src="{% static "js/jquery_1_11_2.js" %}"></script>
         <script src="{% static "js/bootstrap.min.js" %}"></script>
+        <script type="text/javascript">
+            $('#footerDate').text(new Date().getFullYear());
+        </script>
     </body>
 </html>

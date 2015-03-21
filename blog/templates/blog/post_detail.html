@@ -7,18 +7,20 @@
 {% block content %}
     <div class="post_detail col-sm-10 col-sm-offset-1 col-xs-12">
         {% if user.is_authenticated %}
-            <ul class="nav nav-tabs pull-right">
-                <li>
-                    <a href="{% url 'post_edit' post_slug=post.slug %}" class="btn btn-primary btn-sm">
-                        <span class="glyphicon glyphicon-pencil"> Edit</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'post_remove' post_slug=post.slug %}"  class="btn btn-danger btn-sm">
-                        <span class="glyphicon glyphicon-remove"> Delete</span>
-                    </a>
-                </li>
-            </ul>
+            {% if post.author.username == user.username or user.is_staff %}
+                <ul class="nav nav-tabs pull-right">
+                    <li>
+                        <a href="{% url 'post_edit' post_slug=post.slug %}" class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"> Edit</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'post_remove' post_slug=post.slug %}"  class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove"> Delete</span>
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
         {% endif %}
 
         <h1 class="page-header">{{ post.title }}</h1>
@@ -30,8 +32,10 @@
             {% else %}
                 <p>Created: {{ post.created_date }} by {{ post.author }}</p>
                 {% if user.is_authenticated %}
-                    <br>
-                    <a href="{% url 'post_publish' post_slug=post.slug %}"    class="btn btn-primary btn-lg btn-block">Publish</a>
+                    {% if user.username == post.author.username or user.is_staff %}
+                        <br>
+                        <a href="{% url 'post_publish' post_slug=post.slug %}"    class="btn btn-primary btn-lg btn-block">Publish</a>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </div>

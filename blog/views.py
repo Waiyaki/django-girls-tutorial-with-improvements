@@ -3,8 +3,8 @@ from datetime import datetime
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 
 def post_list(request):
@@ -30,7 +30,14 @@ def post_list(request):
 
 def post_detail(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
-    return render(request, 'blog/post_detail.html', {'post': post})
+
+    if post:
+        comments = Comment.objects.filter(post=post)
+        form = CommentForm()
+        context_dict = {'post': post, 'comments': comments, 'form': form}
+    else:
+        context_dict = {'post': post}
+    return render(request, 'blog/post_detail.html', context_dict)
 
 
 @login_required
@@ -83,3 +90,21 @@ def post_remove(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
     post.delete()
     return redirect('blog.views.post_list')
+
+
+def add_comment(request, slug):
+    if request.method == 'POST':
+        author = request.POST['author']
+
+        if not author:
+            author = 'Anonymous'
+
+        comment = Comment(post=get_object_or_404(Post, slug=slug))
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = author
+            comment.save()
+        else:
+            print(form.errors) # print to the console.
+    return redirect('blog.views.post_detail', post_slug=slug)

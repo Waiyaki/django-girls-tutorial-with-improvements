@@ -21,3 +21,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    author = models.CharField(max_length=60, blank=True)
+    title = models.CharField(max_length=60, unique=True)
+    text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(Post)
+
+    def __str__(self):
+        return self.title

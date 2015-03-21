@@ -18,7 +18,7 @@
         <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 jumbotron">
             {% if user.is_authenticated %}
                 <h1>Hello {{ user.username }}.</h1>
-                <p>From where I am sitting, it looks like you are yet to post any content.</p>
+                <p>From where I am sitting, it looks like you -- or any other community member -- are yet to post any content.</p>
                 <p>Click on the button below to create new content.</p>
                 <br>
                 <h2><a href="{% url 'post_new' %}"><span class="btn btn-primary btn-lg btn-block">Post a new blog</span></a></h2>

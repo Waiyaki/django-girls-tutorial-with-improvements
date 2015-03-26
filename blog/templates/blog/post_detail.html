@@ -44,17 +44,31 @@
             <hr>
             <h1>Comments:</h1>
             {% if comments %}
-                <div class="row">
-                    {% for comment in comments %}
-                        <div class="col-xs-12 col-sm-9 col-md-8 pull-left post" id="comment">
-                            <div class=" date pull-left">{{ comment.created_date }} | {{ comment.author }}</div>
-                            <h2>{{ comment.title }}</h2>
-                            <div class="comment-body">
-                                <p>{{ comment.text | linebreaks }}</p>
+                <form action="{% url 'delete_comment' post_slug=post.slug %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for comment in comments %}
+                            <div class="col-xs-10 col-sm-9 col-md-8 pull-left post" id="comment">
+                                <div class=" date pull-left">{{ comment.created_date }} | {{ comment.author }}</div>
+                                <h2>{{ comment.title }}</h2>
+                                <div class="comment-body">
+                                    <p>{{ comment.text | linebreaks }}</p>
+                                </div>
+                                {% if user.username == post.author.username or user.is_staff %}
+                                    <div>
+                                        <input type="checkbox" name="delete" value="{{ comment.pk }}">
+                                        <a href="{% url 'delete_comment' post_slug=post.slug pk=comment.pk %}">Delete</a>
+                                    </div>
+                                {% endif %}
                             </div>
+                        {% endfor %}
+                    </div>
+                    {% if user.is_staff %}
+                        <div class="row">
+                            <button type="submit" class="btn btn-danger">Delete all selected.</button>
                         </div>
-                    {% endfor %}
-                </div>
+                    {% endif %}
+                </form>
             {% else %}
                 <p class="comment-body"><small><em>No comments yet. Feel free to leave one below.</em></small></p>
             {% endif %}
@@ -88,7 +102,7 @@
 
 {% block breadcrumb %}
     <ol class="breadcrumb">
-        <li><a href="/blog/">Home</a></li>
+        <li><a href="/blog/">home</a></li>
         <li class="active"><a href="{% url 'post_detail' post_slug=post.slug %}">{{ post.slug }}</a></li>
     </ol>
 {% endblock %}

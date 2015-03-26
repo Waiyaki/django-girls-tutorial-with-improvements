@@ -11,4 +11,6 @@ urlpatterns = patterns('',
     url(r'^post/(?P<post_slug>[\w\-]+)/publish/$', views.post_publish, name='post_publish'),
     url(r'^post/(?P<post_slug>[\w\-]+)/remove/$', views.post_remove, name="post_remove"),
     url(r'^post/(?P<slug>[\w\-]+)/add_comment/$', views.add_comment, name='add_comment'),
+    url(r'^post/delete_comment/(?P<post_slug>[\w\-]+)/$', views.delete_comment, name='delete_comment'),
+    url(r'^post/delete_comment/(?P<post_slug>[\w\-]+)/(?P<pk>\d+)/$', views.delete_comment, name='delete_comment'),
 )

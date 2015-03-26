@@ -120,3 +120,17 @@ def add_comment(request, slug):
         else:
             print(form.errors)  # print to the console.
     return redirect('blog.views.post_detail', post_slug=slug)
+
+
+@login_required
+def delete_comment(request, post_slug, pk=None):
+    if request.user.is_staff:
+        if not pk:
+            pk_list = request.POST.getlist('delete')
+        else:
+            pk_list = [pk]
+        for pk in pk_list:
+            Comment.objects.get(pk=pk).delete()
+        return redirect('blog.views.post_detail', post_slug=post_slug)
+    else:
+        return redirect('blog.views.post_detail', post_slug=post_slug)
